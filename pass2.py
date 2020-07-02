@@ -1,3 +1,5 @@
+#This file in incomplete and does not work as designed. 
+
 import tkinter as tk
 
 HEIGHT = 700
