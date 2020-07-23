@@ -1,51 +1,49 @@
 #This file in incomplete and does not work as designed. 
 
-import tkinter as tk
+from tkinter import *
 
-HEIGHT = 700
-WIDTH = 800
+HEIGHT = 400
+WIDTH = 600
 
-root =tk.Tk()
+# sample_input_pass = "Samp!e1"
 
-root.title("Put title here")
-
-canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
-canvas.pack()
+# Trying this
+master_list = []
+the_str = []
 
 
 def loop_over_input(the_str=''):
-    master_list = []
     for char in the_str:
         tmp_char = passwordConversion[char]
         master_list.append(tmp_char)
     print("Master Pass List: ", master_list)
     return master_list
 
-def click():
+
+def clk():
+    global the_str
+    global master_list
     entered = ent.get()
-    output.delete(0.0,end)
-
-frame = tk.Frame(root, bg='red', bd=5)
-frame.place(relx=0.5, rely=0.1, relwidth=0.75, relheight=0.1, anchor='n')
-
-entry = tk.Entry(frame, font=40)
-entry.place(relwidth=0.65, relheight=1)
-
-button = tk.Button(frame, text="Convert Password", font=40)
-button.place(relx=0.7, relheight=1, relwidth=0.3)
+    output.delete(0.0, END)
+    for char in the_str:
+        tmp_char = passwordConversion[char]
+        master_list.append(tmp_char)
+    print("Master Pass List ", master_list)
+    return master_list
+    output.insert(0.0, entry2)
+    entry2 = passwordConversion[entered]
 
 
-lower_frame = tk.Frame(root, bg= 'gray', bd=10)
-lower_frame.place(relx=0.5, rely=0.25, relwidth=0.75, relheight=0.6, anchor='n')
+# Keep this is the master code
+# def loop_over_input(the_str=''):
+#     master_list = []
+#     for char in the_str:
+#         tmp_char = passwordConversion[char]
+#         master_list.append(tmp_char)
+#     print("Master Pass List: ", master_list)
+#     return master_list
 
-#label2 = tk.Label(root, text="Enter password to be converted", bg='white')
-#label2.pack(side='top')
-
-label1 = tk.Label(lower_frame, text="Disclamer goes here", bg='white')
-label1.pack(side='bottom')
-
-
-
+# Custom Dictionary
 passwordConversion = {
     "A": "ALPHA",
     "a": "alpha",
@@ -129,7 +127,9 @@ passwordConversion = {
     "]": "right square bracket",
     "{": "left curly bracket",
     "}": "right curly bracket",
+    #   "\": "backslash",
     "/": "forwardslash",
+    #    "|": "pipe",
     "<": "less than sign",
     ">": "greater than sign",
     ",": "comma",
@@ -142,10 +142,48 @@ passwordConversion = {
 
 }
 
-#password = input("Please enter the password: ")
+# loop_over_input(the_str=sample_input_pass)
 
-#print(passwordConversion)
+root = Tk()
+root.title("Title Goes Here")
+
+canvas = Canvas(root, height=HEIGHT, width=WIDTH)
+canvas.pack()
+
+frame = Frame(root, bg='Red', bd=5)
+frame.place(relx=0.5, rely=0.1, relwidth=0.75, relheight=0.1, anchor='n')
+
+lower_frame = Frame(root, bg='#80c1ff', bd=10)
+lower_frame.place(relx=0.5, rely=0.25, relwidth=0.75, relheight=0.25, anchor='n')
+
+entry = Entry(frame, font=40)
+entry.place(relwidth=0.65, relheight=1)
+
+entry2 = Entry(lower_frame, font=40)
+entry2.place(relwidth=1.00, relheight=1.00)
+
+button = Button(frame, text="Password", font=40, )
+button.place(relx=0.7, relheight=1, relwidth=0.3)
+
+label = Label(text="- Disclaimer - \n- Disclaimer line 2 -", )
+label.pack(side='bottom')
+
+# Define Menu Items
+my_menu = Menu(root)
+root.config(menu=my_menu)
+
+# Create Menu Items
+file_menu = Menu(my_menu)
+my_menu.add_cascade(label="File", menu=file_menu)
+file_menu.add_command(label="Exit", command=root.quit)
+
+# Create another submenu Edit
+edit_menu = Menu(my_menu)
+my_menu.add_cascade(label="About", menu=edit_menu)
 
 root.mainloop()
 
+# password = input("Please enter the password: ")
+
+# print(passwordConversion)
 
